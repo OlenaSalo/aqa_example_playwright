@@ -1,6 +1,5 @@
 pipeline {
    agent any
-
    stages {
       stage('Checkout repo') {
           steps{
@@ -8,7 +7,12 @@ pipeline {
              }
           }
       stage('e2e-tests') {
-         agent { docker { image 'mcr.microsoft.com/playwright/python:v1.35.0-jammy' } }
+         agent {
+                docker {
+                    // Specify the Docker image to use for the test stage
+                    image 'mcr.microsoft.com/playwright/python:v1.35.0-jammy'
+                }
+            }
          steps {
             sh 'pip install -r requirements.txt'
             sh 'pytest'
