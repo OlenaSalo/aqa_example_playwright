@@ -17,14 +17,6 @@ pipeline {
             sh 'pip3 install -r requirements.txt'
             sh 'pytest'
          }
-           stage('User name') {
-          steps {
-            script {
-              def user = env.BUILD_USER
-              echo "User who triggered the job: ${user}"
-            }
-          }
-        }
       }
    }
 }
