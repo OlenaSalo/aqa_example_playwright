@@ -1,6 +1,14 @@
 pipeline {
    agent any
    stages {
+     stage('User name') {
+      steps {
+        script {
+          def user = env.BUILD_USER
+          echo "User who triggered the job: ${user}"
+        }
+      }
+    }
       stage('Checkout repo') {
           steps{
              git(url: 'https://github.com/OlenaSalo/aqa_example_playwright.git', branch: 'main')
