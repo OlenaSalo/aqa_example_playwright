@@ -10,7 +10,7 @@ pipeline {
 //          agent { docker { image 'mcr.microsoft.com/playwright/python:v1.35.0-jammy' } }
          steps {
             sh 'pip3 install -r requirements.txt'
-            sh 'pytest'
+            sh 'pytest tests -sv --alluredir=allure_results'
          allure([
                         includeProperties: false,
                         jdk: '',
