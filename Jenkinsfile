@@ -7,7 +7,7 @@ pipeline {
              }
           }
       stage('e2e-tests') {
-         agent { docker { image 'mcr.microsoft.com/playwright/python:v1.35.0-jammy' } }
+//          agent { docker { image 'mcr.microsoft.com/playwright/python:v1.35.0-jammy' } }
          steps {
             sh 'pip3 install -r requirements.txt'
             sh 'pytest'
