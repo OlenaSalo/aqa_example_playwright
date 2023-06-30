@@ -18,5 +18,10 @@ pipeline {
             sh 'pytest'
          }
       }
+      stage('Test Docker Connectivity') {
+        steps {
+             sh 'docker info'
+            }
+        }
    }
 }
