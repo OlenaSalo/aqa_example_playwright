@@ -11,7 +11,6 @@ pipeline {
          steps {
             sh 'pip3 install -r requirements.txt'
             sh 'pytest'
-         }
          allure([
                         includeProperties: false,
                         jdk: '',
@@ -19,6 +18,7 @@ pipeline {
                         reportBuildPolicy: 'ALWAYS',
                         results: [[path: 'allure_results']]
                     ])
+                    }
       }
       stage('Test Docker Connectivity') {
         steps {
