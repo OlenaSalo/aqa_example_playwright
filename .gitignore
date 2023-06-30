@@ -4,3 +4,4 @@ venv/
 *.pyc
 allure/
 *.png
+allure_results/
