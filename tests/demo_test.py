@@ -1,5 +1,4 @@
 def test_demo(get_config, app):
-
     login_page = app.login_page()
     login_page.navigate(get_config.get('base_url'))
     login_page.login_user(username="admin", password="123456")
