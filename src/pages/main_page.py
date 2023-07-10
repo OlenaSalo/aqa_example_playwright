@@ -1,17 +1,14 @@
 import allure
 from playwright.sync_api import Page, expect
 
-
-class MainPage:
-
-
-    def __init__(self, page: Page):
-        self.page = page
+from src.pages.base_page import BasePage
 
 
-    @allure.step("Open main page")
-    def navigate(self, url):
-        self.page.goto(url)
+class MainPage(BasePage):
+
+    def __init__(self, page, base_url):
+        super().__init__(page, base_url)
+
 
     @allure.step("Verify the brand name")
     def verify_the_brand_name(self, brand_name):

@@ -4,7 +4,6 @@ import os
 import sys
 
 import pytest
-from playwright.sync_api import Page, sync_playwright
 
 from src.app import Application
 
@@ -19,7 +18,7 @@ def read_ini():
     parser.read(root_path)
     return parser
 
-@pytest.fixture
+
 def get_config(request):
     env_name = request.config.getoption("--env")
     try:
@@ -27,25 +26,7 @@ def get_config(request):
     except KeyError:
         raise Exception(f"Wrong configuration for env name [{env_name}] NOT present")
 
-
-def remote_browser() -> Page:
-     with sync_playwright() as pl:
-        browser = pl.firefox.connect("http://moon.aerokube.local/wd/hub")
-        context = browser.new_context()
-        page = context.new_page()
-     return page
-
-
-async def remote_br() -> Page:
-    async with sync_playwright() as pl:
-        browser = await pl.firefox.connect("http://moon.aerokube.local/wd/hub")
-        context = await browser.new_context()
-        page = await context.new_page()
-    return page
-
-
 @pytest.fixture
-def app(page: Page, get_config):
-
-    return Application(page)
+def app(page, request):
+    return Application(page, get_config(request)['base_url'])
 

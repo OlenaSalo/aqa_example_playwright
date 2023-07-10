@@ -1,15 +1,16 @@
 import allure
-from playwright.sync_api import Page
+
+from src.pages.base_page import BasePage
 
 
-class LoginPage:
-
-    def __init__(self, page: Page) -> None:
-        self.page = page
+class LoginPage(BasePage):
+    def __init__(self, page, base_url):
+        super().__init__(page, base_url)
 
     @allure.step("Open page")
-    def navigate(self, base_url):
-         self.page.goto(base_url + "/admin/")
+    def navigate(self):
+        super().navigate("/admin/")
+
 
     @allure.step("Login user")
     def login_user(self, **user):
