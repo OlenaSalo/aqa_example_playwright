@@ -1,8 +1,8 @@
-from src.pages.base_page import BasePage
+from playwright.sync_api import Page
 
 
-class UserPage(BasePage):
+class UserPage():
 
-    def __init__(self, page, base_url):
-        super().__init__(page, base_url)
+    def __init__(self, page: Page):
+        self.page = page
 

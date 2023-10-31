@@ -1,6 +1,3 @@
-from playwright.sync_api import Page
-
-from src.pages.base_page import BasePage
 from src.pages.login_page import LoginPage
 from src.pages.main_page import MainPage
 
@@ -11,8 +8,8 @@ class Application:
          self.page = page
          self.base_url = base_url
 
-    def login_page(self):
-        return LoginPage(self.page, self.base_url)
+    def login_page(self) -> LoginPage:
+        return LoginPage(self.page)
 
-    def main_page(self):
-        return MainPage(self.page, self.base_url)
+    def main_page(self) -> MainPage:
+        return MainPage(self.page)

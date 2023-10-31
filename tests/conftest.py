@@ -7,6 +7,7 @@ import pytest
 
 from src.app import Application
 
+
 def pytest_addoption(parser):
     parser.addoption("--env", action="store", default="local", help="env variable name")
 
@@ -26,7 +27,12 @@ def get_config(request):
     except KeyError:
         raise Exception(f"Wrong configuration for env name [{env_name}] NOT present")
 
-@pytest.fixture
-def app(page, request):
-    return Application(page, get_config(request)['base_url'])
 
+@pytest.fixture(scope="session")
+def base_url(request):
+    return get_config(request)['base_url']
+
+
+@pytest.fixture
+def app(page, base_url):
+    return Application(page, base_url)

@@ -1,15 +1,17 @@
 import allure
 from playwright.sync_api import Page, expect
 
-from src.pages.base_page import BasePage
+class MainPage():
+
+    def __init__(self, page: Page) -> None:
+        self.page = page
+
+    @allure.step("Open page")
+    def open_page(self):
+        self.page.goto("/")
+
+    @allure.step("Assert the brand name")
+    def should_have_the_navigate_name(self, brand_name):
+        expect(self.page.get_by_role("link", name=brand_name)).to_be_visible()
 
 
-class MainPage(BasePage):
-
-    def __init__(self, page, base_url):
-        super().__init__(page, base_url)
-
-
-    @allure.step("Verify the brand name")
-    def verify_the_brand_name(self, brand_name):
-        expect(self.page.locator("//a[@href='/admin/']")).to_have_text(brand_name)

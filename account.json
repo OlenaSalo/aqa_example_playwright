@@ -1,0 +1,10 @@
+{
+  "admin": {
+        "username": "adminuser",
+        "password": "adminpassword"
+    },
+  "regular_user": {
+        "username": "olenkalv55@gmail.com",
+        "password": "%cE4sESf?"
+    }
+}
