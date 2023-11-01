@@ -1,0 +1,1 @@
+{"5c26fd217ce8ef212ed47556597ff684":{"statistic":{"failed":0,"broken":0,"skipped":0,"passed":1,"unknown":0,"total":1},"items":[{"uid":"cec964bb93cfdff6","reportUrl":"https://OlenaSalo.github.io/aqa_example_playwright/11//#testresult/cec964bb93cfdff6","status":"passed","time":{"start":1698854050383,"stop":1698854058039,"duration":7656}}]}}
