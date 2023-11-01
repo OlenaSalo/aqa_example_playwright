@@ -21,31 +21,23 @@ jobs:
     - name: Ensure browsers are installed
       run: python -m playwright install --with-deps
     - name: Run your tests
-      run: tests -sv --alluredir=allure_results
-    - name: Upload artifact
+      run: pytest --alluredir=allure-results
       continue-on-error: true
-      uses: actions/upload-pages-artifact@v2
+    - name: Get Allure history
+      uses: actions/checkout@v3
+      continue-on-error: true
       with:
-          name: allure_results
-          path: allure_results
+        ref: gh-pages
+        path: gh-pages
+    -  name: Allure Report action from marketplace
+       uses: simple-elf/allure-report-action@v1.7
+       with:
+              allure_results: allure-results
+              allure_history: allure-history
 
-  generate-report:
-    needs: test
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Repository branch gh-pages
-        uses: actions/checkout@v2
-        with:
-          ref: gh-pages
-
-      - name: Import artifacts from test run
-        uses: actions/download-artifact@v2
-        with:
-          name: allure-results
-          path: allure-results
-
-      - name: Untar the artifact contents
-        run: |
-          tar -xf allure-results/artifact.tar -C allure-results/
-          ls allure-results
-          rm allure-results/artifact.tar
+    - name: Deploy report to Github Pages
+      uses: peaceiris/actions-gh-pages@v2
+      env:
+              PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              PUBLISH_BRANCH: gh-pages
+              PUBLISH_DIR: allure-history
