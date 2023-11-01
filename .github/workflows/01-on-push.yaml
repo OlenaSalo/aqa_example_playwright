@@ -30,7 +30,7 @@ jobs:
           path: allure_results
 
   generate-report:
-    needs: run-tests
+    needs: tests
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository branch gh-pages
